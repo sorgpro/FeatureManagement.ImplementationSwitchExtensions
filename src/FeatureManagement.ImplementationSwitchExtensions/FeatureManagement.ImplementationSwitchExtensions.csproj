@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.1;net5.0</TargetFrameworks>
+    <Authors>Sergey Prokhorov</Authors>
+    <PackageTags>FeatureManagement FeatureFlags AzureAppConfiguration aspnetcore</PackageTags>
+    <Description>FeatureManagement.ImplementationSwitchExtensions contains DI extension methods for switching implementation of interfaces.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/sorgpro/FeatureManagement.ImplementationSwitchExtensions</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.FeatureManagement" Version="2.4.0" />
+  </ItemGroup>
+
+</Project>
