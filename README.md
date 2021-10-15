@@ -1,0 +1,2 @@
+# FeatureManagement.ImplementationSwitchExtensions
+FeatureManagement.ImplementationSwitchExtensions contains DI extension methods for switching implementation of interfaces.
