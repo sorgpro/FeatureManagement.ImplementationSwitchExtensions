@@ -1,4 +1,4 @@
-# FeatureManagement.ImplementationSwitchExtensions
+п»ї# FeatureManagement.ImplementationSwitchExtensions
 
 ## EN
 
@@ -6,15 +6,15 @@ FeatureManagement.ImplementationSwitchExtensions contains DI extension methods f
 
 ## RU
 
-### Описание
+### РћРїРёСЃР°РЅРёРµ
 
-FeatureManagement.ImplementationSwitchExtensions содержит методы расширения [DI](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection) для переключения реализаций интерфейсов.
+FeatureManagement.ImplementationSwitchExtensions СЃРѕРґРµСЂР¶РёС‚ РјРµС‚РѕРґС‹ СЂР°СЃС€РёСЂРµРЅРёСЏ [DI](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection) РґР»СЏ РїРµСЂРµРєР»СЋС‡РµРЅРёСЏ СЂРµР°Р»РёР·Р°С†РёР№ РёРЅС‚РµСЂС„РµР№СЃРѕРІ.
 
-Для управления переключателями функциональности используется NuGet-пакет [Microsoft.FeatureManagement](https://www.nuget.org/packages/Microsoft.FeatureManagement/). Официальная документация [здесь](https://docs.microsoft.com/ru-ru/azure/azure-app-configuration/use-feature-flags-dotnet-core?tabs=core5x "Руководство по использованию флагов функций в приложении ASP.NET Core"). С примерами настройки и использования переключателей можно ознакомиться в [этой серии статей](https://andrewlock.net/series/adding-feature-flags-to-an-asp-net-core-app/ "Series: Adding feature flags to an ASP.NET Core app").
+Р”Р»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РїРµСЂРµРєР»СЋС‡Р°С‚РµР»СЏРјРё С„СѓРЅРєС†РёРѕРЅР°Р»СЊРЅРѕСЃС‚Рё РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ NuGet-РїР°РєРµС‚ [Microsoft.FeatureManagement](https://www.nuget.org/packages/Microsoft.FeatureManagement/). РћС„РёС†РёР°Р»СЊРЅР°СЏ РґРѕРєСѓРјРµРЅС‚Р°С†РёСЏ [Р·РґРµСЃСЊ](https://docs.microsoft.com/ru-ru/azure/azure-app-configuration/use-feature-flags-dotnet-core?tabs=core5x "Р СѓРєРѕРІРѕРґСЃС‚РІРѕ РїРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЋ С„Р»Р°РіРѕРІ С„СѓРЅРєС†РёР№ РІ РїСЂРёР»РѕР¶РµРЅРёРё ASP.NET Core"). РЎ РїСЂРёРјРµСЂР°РјРё РЅР°СЃС‚СЂРѕР№РєРё Рё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РїРµСЂРµРєР»СЋС‡Р°С‚РµР»РµР№ РјРѕР¶РЅРѕ РѕР·РЅР°РєРѕРјРёС‚СЊСЃСЏ РІ [СЌС‚РѕР№ СЃРµСЂРёРё СЃС‚Р°С‚РµР№](https://andrewlock.net/series/adding-feature-flags-to-an-asp-net-core-app/ "Series: Adding feature flags to an ASP.NET Core app").
 
-### Прототипы методов NuGet-пакета FeatureManagement.ImplementationSwitchExtensions
+### РџСЂРѕС‚РѕС‚РёРїС‹ РјРµС‚РѕРґРѕРІ NuGet-РїР°РєРµС‚Р° FeatureManagement.ImplementationSwitchExtensions
 
-Всего три метода расширения:
+Р’СЃРµРіРѕ С‚СЂРё РјРµС‚РѕРґР° СЂР°СЃС€РёСЂРµРЅРёСЏ:
 
 ```csharp
 public static IServiceCollection AddTransientFeature<TService, TFeatureOnImplementation, TFeatureOffImplementation>
@@ -40,31 +40,31 @@ public static IServiceCollection AddSingletonFeature<TService, TFeatureOnImpleme
     where TFeatureOffImplementation : class, TService;
 ```
 
-> Метод AddSingletonFeature на самом деле не выполняет поставленных задач и не переключает функциональность во время работы приложения. Это связано с тем, что создание экземпляра происходит лишь один раз. Тем не менее я решил добавить его "для комплекта". Возможно он тоже найдет своё применение в виду его единообразного использования наряду с `AddTransientFeature` и `AddScopedFeature`.
+> РњРµС‚РѕРґ AddSingletonFeature РЅР° СЃР°РјРѕРј РґРµР»Рµ РЅРµ РІС‹РїРѕР»РЅСЏРµС‚ РїРѕСЃС‚Р°РІР»РµРЅРЅС‹С… Р·Р°РґР°С‡ Рё РЅРµ РїРµСЂРµРєР»СЋС‡Р°РµС‚ С„СѓРЅРєС†РёРѕРЅР°Р»СЊРЅРѕСЃС‚СЊ РІРѕ РІСЂРµРјСЏ СЂР°Р±РѕС‚С‹ РїСЂРёР»РѕР¶РµРЅРёСЏ. Р­С‚Рѕ СЃРІСЏР·Р°РЅРѕ СЃ С‚РµРј, С‡С‚Рѕ СЃРѕР·РґР°РЅРёРµ СЌРєР·РµРјРїР»СЏСЂР° РїСЂРѕРёСЃС…РѕРґРёС‚ Р»РёС€СЊ РѕРґРёРЅ СЂР°Р·. РўРµРј РЅРµ РјРµРЅРµРµ СЏ СЂРµС€РёР» РґРѕР±Р°РІРёС‚СЊ РµРіРѕ "РґР»СЏ РєРѕРјРїР»РµРєС‚Р°". Р’РѕР·РјРѕР¶РЅРѕ РѕРЅ С‚РѕР¶Рµ РЅР°Р№РґРµС‚ СЃРІРѕС‘ РїСЂРёРјРµРЅРµРЅРёРµ РІ РІРёРґСѓ РµРіРѕ РµРґРёРЅРѕРѕР±СЂР°Р·РЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РЅР°СЂСЏРґСѓ СЃ `AddTransientFeature` Рё `AddScopedFeature`.
 
-### Использование NuGet-пакета FeatureManagement.ImplementationSwitchExtensions
+### РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ NuGet-РїР°РєРµС‚Р° FeatureManagement.ImplementationSwitchExtensions
 
-Предположим у вас имеется интерфейс ISomething и его реализация в классе Something. Тогда регистрация в DI реализуется одним из следующих способов, в зависимости от [времени существования службы](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection#service-lifetimes):
+РџСЂРµРґРїРѕР»РѕР¶РёРј Сѓ РІР°СЃ РёРјРµРµС‚СЃСЏ РёРЅС‚РµСЂС„РµР№СЃ ISomething Рё РµРіРѕ СЂРµР°Р»РёР·Р°С†РёСЏ РІ РєР»Р°СЃСЃРµ Something. РўРѕРіРґР° СЂРµРіРёСЃС‚СЂР°С†РёСЏ РІ DI СЂРµР°Р»РёР·СѓРµС‚СЃСЏ РѕРґРЅРёРј РёР· СЃР»РµРґСѓСЋС‰РёС… СЃРїРѕСЃРѕР±РѕРІ, РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ [РІСЂРµРјРµРЅРё СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ СЃР»СѓР¶Р±С‹](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection#service-lifetimes):
 
 ```csharp
 services.AddTransient<ISomething, Something>();
 ```
 
-или
+РёР»Рё
 
 ```csharp
 services.AddScoped<ISomething, Something>();
 ```
 
-или
+РёР»Рё
 
 ```csharp
 services.AddSingleton<ISomething, Something>();
 ```
 
-Нужно создать альтернативную реализацию интерфейса ISomething, например в классе SomethingStub. Таким образом оба класса Something и SomethingStub реализуют интерфейс ISomething.
+РќСѓР¶РЅРѕ СЃРѕР·РґР°С‚СЊ Р°Р»СЊС‚РµСЂРЅР°С‚РёРІРЅСѓСЋ СЂРµР°Р»РёР·Р°С†РёСЋ РёРЅС‚РµСЂС„РµР№СЃР° ISomething, РЅР°РїСЂРёРјРµСЂ РІ РєР»Р°СЃСЃРµ SomethingStub. РўР°РєРёРј РѕР±СЂР°Р·РѕРј РѕР±Р° РєР»Р°СЃСЃР° Something Рё SomethingStub СЂРµР°Р»РёР·СѓСЋС‚ РёРЅС‚РµСЂС„РµР№СЃ ISomething.
 
-Для использования переключателя функциональности требуется завести соответствующий раздел в файле конфигурации приложения `appsettings.json`:
+Р”Р»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РїРµСЂРµРєР»СЋС‡Р°С‚РµР»СЏ С„СѓРЅРєС†РёРѕРЅР°Р»СЊРЅРѕСЃС‚Рё С‚СЂРµР±СѓРµС‚СЃСЏ Р·Р°РІРµСЃС‚Рё СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ СЂР°Р·РґРµР» РІ С„Р°Р№Р»Рµ РєРѕРЅС„РёРіСѓСЂР°С†РёРё РїСЂРёР»РѕР¶РµРЅРёСЏ `appsettings.json`:
 
 ```json
 {
@@ -75,44 +75,44 @@ services.AddSingleton<ISomething, Something>();
 }
 ```
 
-Так же необходимо добавить регистрацию библиотеки переключателей функциональности `Microsoft.FeatureManagement`:
+РўР°Рє Р¶Рµ РЅРµРѕР±С…РѕРґРёРјРѕ РґРѕР±Р°РІРёС‚СЊ СЂРµРіРёСЃС‚СЂР°С†РёСЋ Р±РёР±Р»РёРѕС‚РµРєРё РїРµСЂРµРєР»СЋС‡Р°С‚РµР»РµР№ С„СѓРЅРєС†РёРѕРЅР°Р»СЊРЅРѕСЃС‚Рё `Microsoft.FeatureManagement`:
 
 ```csharp
 services.AddFeatureManagement();
 ```
 
-Осталось заменить регистрацию реализации интерфейса в DI соответствующим способом:
+РћСЃС‚Р°Р»РѕСЃСЊ Р·Р°РјРµРЅРёС‚СЊ СЂРµРіРёСЃС‚СЂР°С†РёСЋ СЂРµР°Р»РёР·Р°С†РёРё РёРЅС‚РµСЂС„РµР№СЃР° РІ DI СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРј СЃРїРѕСЃРѕР±РѕРј:
 
 ```csharp
 services.AddTransientFeature<ISomething, SomethingStub, Something>("UseSomethingStub");
 ```
 
-или
+РёР»Рё
 
 ```csharp
 services.AddScopedFeature<ISomething, SomethingStub, Something>("UseSomethingStub");
 ```
 
-или
+РёР»Рё
 
 ```csharp
 services.AddSingletonFeature<ISomething, SomethingStub, Something>("UseSomethingStub");
 ```
 
-В указанных примерах регистрации константная строка "UseSomethingStub" должна быть одноименной с соответствующим разделом в файле конфигурации  `appsettings.json`: "FeatureManagement:UseSomethingStub".
+Р’ СѓРєР°Р·Р°РЅРЅС‹С… РїСЂРёРјРµСЂР°С… СЂРµРіРёСЃС‚СЂР°С†РёРё РєРѕРЅСЃС‚Р°РЅС‚РЅР°СЏ СЃС‚СЂРѕРєР° "UseSomethingStub" РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РѕРґРЅРѕРёРјРµРЅРЅРѕР№ СЃ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРј СЂР°Р·РґРµР»РѕРј РІ С„Р°Р№Р»Рµ РєРѕРЅС„РёРіСѓСЂР°С†РёРё  `appsettings.json`: "FeatureManagement:UseSomethingStub".
 
-Важно! Если вы разрешаете тип HttpClient в классе Something, то после регистрации методами группы ...Feature необходимо заменить регистрацию HTTP-клиента с такого варианта:
+Р’Р°Р¶РЅРѕ! Р•СЃР»Рё РІС‹ СЂР°Р·СЂРµС€Р°РµС‚Рµ С‚РёРї HttpClient РІ РєР»Р°СЃСЃРµ Something, С‚Рѕ РїРѕСЃР»Рµ СЂРµРіРёСЃС‚СЂР°С†РёРё РјРµС‚РѕРґР°РјРё РіСЂСѓРїРїС‹ ...Feature РЅРµРѕР±С…РѕРґРёРјРѕ Р·Р°РјРµРЅРёС‚СЊ СЂРµРіРёСЃС‚СЂР°С†РёСЋ HTTP-РєР»РёРµРЅС‚Р° СЃ С‚Р°РєРѕРіРѕ РІР°СЂРёР°РЅС‚Р°:
 
 ```csharp
 services.AddHttpClient<ISomething, Something>( //...
 ```
 
-на такой:
+РЅР° С‚Р°РєРѕР№:
 
 ```csharp
 services.AddHttpClient<Something>( //...
 ```
 
-Всё готово! При переключении значения "FeatureManagement:UseSomethingStub" конфигурации интерфейс ISomething будет разрешаться DI соответствующим классом SomethingStub или Something.
+Р’СЃС‘ РіРѕС‚РѕРІРѕ! РџСЂРё РїРµСЂРµРєР»СЋС‡РµРЅРёРё Р·РЅР°С‡РµРЅРёСЏ "FeatureManagement:UseSomethingStub" РєРѕРЅС„РёРіСѓСЂР°С†РёРё РёРЅС‚РµСЂС„РµР№СЃ ISomething Р±СѓРґРµС‚ СЂР°Р·СЂРµС€Р°С‚СЊСЃСЏ DI СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРј РєР»Р°СЃСЃРѕРј SomethingStub РёР»Рё Something.
 
-Подробности использования в [статье](https://habr.com/ru/company/akbarsdigital/blog/597541/).
+РџРѕРґСЂРѕР±РЅРѕСЃС‚Рё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РІ [СЃС‚Р°С‚СЊРµ](https://habr.com/ru/company/akbarsdigital/blog/597541/).
