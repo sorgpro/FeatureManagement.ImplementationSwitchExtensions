@@ -71,8 +71,6 @@ services.AddSingleton<ISomething, Something>();
   "FeatureManagement": {
     "UseSomethingStub": false,
   },
-
-  // ...
 }
 ```
 
