@@ -2,13 +2,13 @@
 
 ## Description
 
-FeatureManagement.ImplementationSwitchExtensions contains [DI](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection) extension methods for swithing interface implimentations.
+`FeatureManagement.ImplementationSwitchExtensions` contains [DI](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection) extension methods for swithing interface implimentations.
 
-The [Microsoft.FeatureManagement](https://www.nuget.org/packages/Microsoft.FeatureManagement/) package is used to manag feature toggles. The official documentation [is here](https://docs.microsoft.com/ru-ru/azure/azure-app-configuration/use-feature-flags-dotnet-core?tabs=core5x). In [this article series](https://andrewlock.net/series/adding-feature-flags-to-an-asp-net-core-app/) you can get acquainted with examples how to set up and use the switches.
+The [Microsoft.FeatureManagement](https://www.nuget.org/packages/Microsoft.FeatureManagement/) package is used to manag feature toggles. The official documentation [is here](https://docs.microsoft.com/en-us/azure/azure-app-configuration/use-feature-flags-dotnet-core?tabs=core5x). In [this article series](https://andrewlock.net/series/adding-feature-flags-to-an-asp-net-core-app/) you can get acquainted with examples how to set up and use the switches.
 
 This document is also available in [Russian](README-ru.md).
 
-## The NuGet FeatureManagement.ImplementationSwitchExtensions package methods prototypes
+## The FeatureManagement.ImplementationSwitchExtensions NuGet package methods prototypes
 
 There are only three methods of expansion:
 
@@ -36,11 +36,11 @@ public static IServiceCollection AddSingletonFeature<TService, TFeatureOnImpleme
     where TFeatureOffImplementation : class, TService;
 ```
 
-> The AddSingletonFeature method doesn't really do the job and doesn't switch functionality while the application is running. This is due to the fact that the creation of an instance occurs only once. However, I decided to add it for the sake of completeness. Perhaps, it can find a use for somebody due to its uniform use along with `AddTransientFeature` and `AddScopedFeature`.
+> The `AddSingletonFeature` method doesn't really do the job and doesn't switch functionality while the application is running. This is due to the fact that the creation of an instance occurs only once. However, I decided to add it for the sake of completeness. Perhaps, it can find a use for somebody due to its uniform use along with `AddTransientFeature` and `AddScopedFeature`.
 
-## Using the NuGet FeatureManagement.ImplementationSwitchExtensions package
+## Using the FeatureManagement.ImplementationSwitchExtensions NuGet package
 
-Lets suppose you have ISomething interface and its Something realization. The DI registration is then implemented via one of the following methodes, depending on its [time of servise](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection#service-lifetimes):
+Lets suppose you have ISomething interface and its Something realization. The DI registration is then implemented via one of the following methodes, depending on its [time of servise](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#service-lifetimes):
 
 ``` C#
 services.AddTransient<ISomething, Something>(); 

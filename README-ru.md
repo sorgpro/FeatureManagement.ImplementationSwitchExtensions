@@ -2,7 +2,7 @@
 
 ## Описание
 
-FeatureManagement.ImplementationSwitchExtensions содержит методы расширения [DI](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection) для переключения реализаций интерфейсов.
+`FeatureManagement.ImplementationSwitchExtensions` содержит методы расширения [DI](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection) для переключения реализаций интерфейсов.
 
 Для управления переключателями функциональности используется NuGet-пакет [Microsoft.FeatureManagement](https://www.nuget.org/packages/Microsoft.FeatureManagement/). Официальная документация [здесь](https://docs.microsoft.com/ru-ru/azure/azure-app-configuration/use-feature-flags-dotnet-core?tabs=core5x "Руководство по использованию флагов функций в приложении ASP.NET Core"). С примерами настройки и использования переключателей можно ознакомиться в [этой серии статей](https://andrewlock.net/series/adding-feature-flags-to-an-asp-net-core-app/ "Series: Adding feature flags to an ASP.NET Core app").
 
@@ -36,7 +36,7 @@ public static IServiceCollection AddSingletonFeature<TService, TFeatureOnImpleme
     where TFeatureOffImplementation : class, TService;
 ```
 
-> Метод AddSingletonFeature на самом деле не выполняет поставленных задач и не переключает функциональность во время работы приложения. Это связано с тем, что создание экземпляра происходит лишь один раз. Тем не менее я решил добавить его "для комплекта". Возможно он тоже найдет своё применение в виду его единообразного использования наряду с `AddTransientFeature` и `AddScopedFeature`.
+> Метод `AddSingletonFeature` на самом деле не выполняет поставленных задач и не переключает функциональность во время работы приложения. Это связано с тем, что создание экземпляра происходит лишь один раз. Тем не менее я решил добавить его "для комплекта". Возможно он тоже найдет своё применение в виду его единообразного использования наряду с `AddTransientFeature` и `AddScopedFeature`.
 
 ## Использование NuGet-пакета FeatureManagement.ImplementationSwitchExtensions
 
