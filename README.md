@@ -1,22 +1,18 @@
 ﻿# FeatureManagement.ImplementationSwitchExtensions
 
-## EN
+## Description
 
-FeatureManagement.ImplementationSwitchExtensions contains DI extension methods for switching implementation of interfaces.
+FeatureManagement.ImplementationSwitchExtensions contains [DI](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection) extension methods for swithing interface implimentations.
 
-## RU
+The [Microsoft.FeatureManagement](https://www.nuget.org/packages/Microsoft.FeatureManagement/) package is used to manag feature toggles. The official documentation [is here](https://docs.microsoft.com/ru-ru/azure/azure-app-configuration/use-feature-flags-dotnet-core?tabs=core5x). In [this article series](https://andrewlock.net/series/adding-feature-flags-to-an-asp-net-core-app/) you can get acquainted with examples how to set up and use the switches.
 
-### Описание
+This document is also available in [Russian](README-ru.md).
 
-FeatureManagement.ImplementationSwitchExtensions содержит методы расширения [DI](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection) для переключения реализаций интерфейсов.
+## The NuGet FeatureManagement.ImplementationSwitchExtensions package methods prototypes
 
-Для управления переключателями функциональности используется NuGet-пакет [Microsoft.FeatureManagement](https://www.nuget.org/packages/Microsoft.FeatureManagement/). Официальная документация [здесь](https://docs.microsoft.com/ru-ru/azure/azure-app-configuration/use-feature-flags-dotnet-core?tabs=core5x "Руководство по использованию флагов функций в приложении ASP.NET Core"). С примерами настройки и использования переключателей можно ознакомиться в [этой серии статей](https://andrewlock.net/series/adding-feature-flags-to-an-asp-net-core-app/ "Series: Adding feature flags to an ASP.NET Core app").
+There are only three methods of expansion:
 
-### Прототипы методов NuGet-пакета FeatureManagement.ImplementationSwitchExtensions
-
-Всего три метода расширения:
-
-```csharp
+``` C#
 public static IServiceCollection AddTransientFeature<TService, TFeatureOnImplementation, TFeatureOffImplementation>
     (this IServiceCollection services, string featureName)
     where TService : class
@@ -24,7 +20,7 @@ public static IServiceCollection AddTransientFeature<TService, TFeatureOnImpleme
     where TFeatureOffImplementation : class, TService;
 ```
 
-```csharp
+``` C#
 public static IServiceCollection AddScopedFeature<TService, TFeatureOnImplementation, TFeatureOffImplementation>
     (this IServiceCollection services, string featureName)
     where TService : class
@@ -32,7 +28,7 @@ public static IServiceCollection AddScopedFeature<TService, TFeatureOnImplementa
     where TFeatureOffImplementation : class, TService;
 ```
 
-```csharp
+``` C#
 public static IServiceCollection AddSingletonFeature<TService, TFeatureOnImplementation, TFeatureOffImplementation>
     (this IServiceCollection services, string featureName)
     where TService : class
@@ -40,33 +36,32 @@ public static IServiceCollection AddSingletonFeature<TService, TFeatureOnImpleme
     where TFeatureOffImplementation : class, TService;
 ```
 
-> Метод AddSingletonFeature на самом деле не выполняет поставленных задач и не переключает функциональность во время работы приложения. Это связано с тем, что создание экземпляра происходит лишь один раз. Тем не менее я решил добавить его "для комплекта". Возможно он тоже найдет своё применение в виду его единообразного использования наряду с `AddTransientFeature` и `AddScopedFeature`.
+> The AddSingletonFeature method doesn't really do the job and doesn't switch functionality while the application is running. This is due to the fact that the creation of an instance occurs only once. However, I decided to add it for the sake of completeness. Perhaps, it can find a use for somebody due to its uniform use along with `AddTransientFeature` and `AddScopedFeature`.
 
-### Использование NuGet-пакета FeatureManagement.ImplementationSwitchExtensions
+## Using the NuGet FeatureManagement.ImplementationSwitchExtensions package
 
-Предположим у вас имеется интерфейс ISomething и его реализация в классе Something. Тогда регистрация в DI реализуется одним из следующих способов, в зависимости от [времени существования службы](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection#service-lifetimes):
+Lets suppose you have ISomething interface and its Something realization. The DI registration is then implemented via one of the following methodes, depending on its [time of servise](https://docs.microsoft.com/ru-ru/dotnet/core/extensions/dependency-injection#service-lifetimes):
 
-```csharp
-services.AddTransient<ISomething, Something>();
+``` C#
+services.AddTransient<ISomething, Something>(); 
 ```
 
-или
+or
 
-```csharp
+``` C#
 services.AddScoped<ISomething, Something>();
 ```
 
-или
+or
 
-```csharp
+``` C#
 services.AddSingleton<ISomething, Something>();
 ```
 
-Нужно создать альтернативную реализацию интерфейса ISomething, например в классе SomethingStub. Таким образом оба класса Something и SomethingStub реализуют интерфейс ISomething.
+You need to create an alternative ISomething alternative realisation e.g. in SomethingStub class. Thus, both classes Something and SomethingStub implement ISomething interface.  
+To use feature toggle you need to have corresponding section in the `appsettings.json` application configuration file:
 
-Для использования переключателя функциональности требуется завести соответствующий раздел в файле конфигурации приложения `appsettings.json`:
-
-```json
+``` C#
 {
   "FeatureManagement": {
     "UseSomethingStub": false,
@@ -74,44 +69,43 @@ services.AddSingleton<ISomething, Something>();
 }
 ```
 
-Так же необходимо добавить регистрацию библиотеки переключателей функциональности `Microsoft.FeatureManagement`:
+Also you need to add feature toggle `Microsoft.FeatureManagement` library registration:
 
-```csharp
+``` C#
 services.AddFeatureManagement();
 ```
 
-Осталось заменить регистрацию реализации интерфейса в DI соответствующим способом:
+Remains replace DI interface registration in an appropriate way:
 
-```csharp
+``` C#
 services.AddTransientFeature<ISomething, SomethingStub, Something>("UseSomethingStub");
 ```
 
-или
+or
 
-```csharp
+``` C#
 services.AddScopedFeature<ISomething, SomethingStub, Something>("UseSomethingStub");
 ```
 
-или
+or
 
-```csharp
+``` C#
 services.AddSingletonFeature<ISomething, SomethingStub, Something>("UseSomethingStub");
 ```
 
-В указанных примерах регистрации константная строка "UseSomethingStub" должна быть одноименной с соответствующим разделом в файле конфигурации  `appsettings.json`: "FeatureManagement:UseSomethingStub".
+In the above registration examples the constant string "UseSomethingStub" must be of the same name as the corresponding section in configuration file `appsettings.json`: "FeatureManagement:UseSomethingStub".  
+Important! If you allow HttpClient type in the Something class, then after registering with the ...Feature group methods you should change registration of HTTP-client from this variant:  
 
-Важно! Если вы разрешаете тип HttpClient в классе Something, то после регистрации методами группы ...Feature необходимо заменить регистрацию HTTP-клиента с такого варианта:
-
-```csharp
+``` C#
 services.AddHttpClient<ISomething, Something>( //...
 ```
 
-на такой:
+to this:
 
-```csharp
-services.AddHttpClient<Something>( //...
+``` C#
+services.AddHttpClient<Something>( //... 
 ```
 
-Всё готово! При переключении значения "FeatureManagement:UseSomethingStub" конфигурации интерфейс ISomething будет разрешаться DI соответствующим классом SomethingStub или Something.
+Done! When you toggle "FeatureManagement:UseSomethingStub" configuration value, the ISomething interface will be resolved by the DI with appropriate SomethingStub or Something class.  
 
-Подробности использования в [статье](https://habr.com/ru/company/akbarsdigital/blog/597541/).
+Details of exploitation in this [article](https://habr.com/ru/company/akbarsdigital/blog/597541/) [ru].
